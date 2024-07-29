@@ -1,0 +1,73 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #F5B335;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+  /* Set background image and adjust positioning as needed */
+  background-image: url("images/logo.png");
+  background-repeat: no-repeat;
+  background-position: top 20px left 20px; /* Adjust position */
+}
+
+h1,
+h2,
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style both email and password inputs to have the same width */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+
+button {
+  /* A more muted green color */
+  background-color: #3e8e41;
+  color: white;
+  /* Reduced padding to make the button less wide */
+  padding: 10px 50px;
+  border: none;
+  /* Increased border radius for a more rounded look */
+  border-radius: 5px;
+  cursor: pointer;
+  /* Center the button horizontally */
+  margin: 0 auto;
+  /* Increased margin top for better spacing */
+  margin-top: 20px;
+  /* Add a box shadow to give the button some depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Add a transition effect to make the button more interactive */
+  transition: background-color 0.3s;
+
+}
+
+/* Add a hover effect to change the button's background color on hover */
+button:hover {
+  background-color: #2e6c31;
+}
+
