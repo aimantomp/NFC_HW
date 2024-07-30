@@ -30,9 +30,9 @@ if (isset($_SESSION['empemail']) && isset($_SESSION['emppass'])) {
     if ($result->num_rows == 0) {
         echo "<center><h1>Login Fail</h1></center>";
         session_unset();
-        echo "<meta http-equiv=\"refresh\" content=\"3;URL=../index.html\">";
+        echo "<meta http-equiv=\"refresh\" content=\"3;URL=../test.html\">";
     } else {
-        $_SESSION['empid'] = $row['userID'];
+        $_SESSION['empid'] = $row['empid'];
         header('Location: home.php');
     }
 
