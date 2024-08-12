@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <link rel="stylesheet" href="cuba2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="contact-list">
+        <h1>Contact List</h1>
+        <div class="contact-header">
+            <span>NAME</span>
+        </div>
+        <div class="contact">
+            <div class="contact-info">
+                <div class="contact-number">1</div>
+                <div class="contact-details">
+                    <h2>Brandon Taylor</h2>
+                    <p>In sit prodent minim</p>
+                </div>
+                <div class="contact-actions">
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i></button>
+                    <button class="more-btn" onclick="toggleDetails(this)"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            <div class="contact-expanded" style="display: none;">
+                <p><strong>NAME:</strong> Brandon Taylor</p>
+                <p><strong>COMPANY NAME:</strong> Example Co.</p>
+                <p><strong>EMAIL:</strong> brandon.taylor@example.com</p>
+                <div class="contact-buttons">
+                    <button class="remove-btn" onclick="confirmAction('remove')">Remove</button>
+                    <button class="save-btn" onclick="confirmAction('save')">Save</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="contact">
+            <div class="contact-info">
+                <div class="contact-number">2</div>
+                <div class="contact-details">
+                    <h2>Alfonso Abu</h2>
+                    <p>Quis exercitation incididunt</p>
+                </div>
+                <div class="contact-actions">
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i></button>
+                    <button class="more-btn" onclick="toggleDetails(this)"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            <div class="contact-expanded" style="display: none;">
+                <p><strong>NAME:</strong> Alfonso Abu</p>
+                <p><strong>COMPANY NAME:</strong> Rimba Bara Sdn Bhd</p>
+                <p><strong>EMAIL:</strong> codyfisher@company.com</p>
+                <div class="contact-buttons">
+                    <button class="remove-btn" onclick="confirmAction('remove')">Remove</button>
+                    <button class="save-btn" onclick="confirmAction('save')">Save</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="contact">
+            <div class="contact-info">
+                <div class="contact-number">2</div>
+                <div class="contact-details">
+                    <h2>Hanafiah Debosque</h2>
+                    <p>Senior Security Analyst</p>
+                </div>
+                <div class="contact-actions">
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i></button>
+                    <button class="more-btn" onclick="toggleDetails(this)"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            <div class="contact-expanded" style="display: none;">
+                <p><strong>NAME:</strong> Hanafiah Debosque</p>
+                <p><strong>COMPANY NAME:</strong> Mak Kau Hijau Sdn Bhd</p>
+                <p><strong>EMAIL:</strong> makkauhijau@company.com</p>
+                <div class="contact-buttons">
+                    <button class="remove-btn" onclick="confirmAction('remove')">Remove</button>
+                    <button class="save-btn" onclick="confirmAction('save')">Save</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Add more contact divs as needed -->
+    </div>
+    <script src="cuba2.js"></script>
+</body>
+</html>

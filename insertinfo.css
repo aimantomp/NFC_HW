@@ -1,0 +1,48 @@
+body {
+    background-color: #F5B335;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 300px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    padding: 40px;
+}
+
+.logo {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upload-button, .qr-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #45A041;
+    color: white;
+    cursor: pointer;
+}
+

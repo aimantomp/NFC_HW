@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5B335;
+    margin: 40;
+    padding: 40;
+}
+
+.profile-page {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header {
+    background-color: #4CAF50;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-pic img {
+    width: 100%;
+    height: auto;
+}
+
+.profile-card {
+    background-color: #FFD700;
+    padding: 40px 20px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.profile-info, .bank-info {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.profile-info p, .bank-info p {
+    margin: 5px 0;
+}
+
+.company-info {
+    padding: 20px;
+    text-align: left;
+    border-top: 1px solid #e0e0e0;
+}
+
+.company-info h2 {
+    margin-top: 0;
+}
+
+.scan-qr, .contact-list, .edit-info, .log-out {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.scan-qr a, .contact-list a, .edit-info a, .log-out a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.scan-qr a i, .contact-list a i, .edit-info a i, .log-out a i {
+    margin-right: 10px;
+}
+
+.log-out a {
+    color: #ff5252;
+}
+
+.arrow-icon {
+    margin-left: auto;
+    color: #000;
+}
