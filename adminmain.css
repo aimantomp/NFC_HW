@@ -1,0 +1,321 @@
+/* General Reset and Styling */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Section Background */
+.section {
+    background-color: yellow;
+}
+
+/* Top Navigation Bar */
+.top-nav-section {
+    background-color: #F5B335;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.top-nav-section nav ul {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    width: 100%; /* Ensure full width */
+}
+
+.top-nav-section nav ul li {
+    list-style-type: none;
+    margin: 0 10px;
+}
+
+.top-nav-section nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 18px 16px;
+    display: block;
+}
+
+.top-nav-section nav ul li a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* Left Navigation Section */
+.left-nav-section {
+    float: left;
+    background-color: #45A041;
+    width: 40px;
+    height: 100vh; /* Full height */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.left-nav-section nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.left-nav-section nav ul li {
+    margin: 10px 0;
+}
+
+.left-nav-section nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.left-nav-section nav ul li a:hover {
+    background-color: #3a8835;
+    border-radius: 4px;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 220px; /* Leave space for the left navigation */
+    padding: 20px;
+}
+
+.business-card-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+tbody tr {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.edit-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #5ed756;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Popup Styles */
+.cd-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    z-index: 9999;
+}
+
+.cd-popup.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.cd-popup-container {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    margin: 4em auto;
+    background: #FFF;
+    border-radius: .25em .25em .4em .4em;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    padding: 2em 1em;
+}
+
+.cd-popup-container p {
+    margin: 0;
+    padding: 2em 1em;
+}
+
+.cd-buttons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cd-buttons a {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+    background: #00BB60;
+    transition: background-color 0.2s;
+}
+
+.cd-buttons a:hover {
+    background-color: #555;
+}
+
+.cd-popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background: url('https://cdn0.iconfinder.com/data/icons/feather/96/x-512.png') no-repeat center center;
+}
+
+.cd-popup-close:hover {
+    background: url('https://cdn0.iconfinder.com/data/icons/feather/96/x-512.png') no-repeat center center;
+    background-size: 20px 20px;
+}
+
+.img-replace {
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    border-radius: 50%;
+    background: #FFF url('https://cdn0.iconfinder.com/data/icons/feather/96/x-512.png') no-repeat center center;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .top-nav-section {
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%; /* Ensure full width */
+    }
+
+    .left-nav-section {
+        height: auto;
+        padding: 10px;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .business-card-table {
+        font-size: 14px;
+    }
+
+    .cd-popup-container {
+        width: 95%;
+        margin: 2em auto;
+    }
+
+    .cd-buttons {
+        flex-direction: column;
+    }
+
+    .cd-buttons a {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-nav-section {
+        padding: 10px;
+        width: 127%;
+    }
+
+    .left-nav-section nav ul li a {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .business-card-table {
+        font-size: 12px;
+    }
+
+    th, td {
+        flex-wrap: wrap;
+        width: auto;
+        padding: 0px 0px;
+        box-sizing: border-box;
+    }
+
+    .top-nav-section nav ul li a {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 8px;
+    }
+}
+
+#logo {
+    background-color: #dddddd;
+    width: 60px;
+    height: 60px;
+    border-radius: 30%;
+}
