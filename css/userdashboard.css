@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    background-color: #45A041;
+    height: 210px;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #45A041;
+    color: orange;
+    padding: 5%;
+}
+
+.info-container {
+    background-color: #F5B335;
+    margin: -3rem 2.5rem 0rem 2.5rem;
+    padding: 1%;
+    text-align: center; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    border-radius: 20px;
+}
+
+img {
+    width: 150px;
+    border-radius: 75px;
+    margin: -5rem 0rem 0rem 0rem;
+}
+
+.company-info {
+    margin: 0 2.5rem;
+    padding: 1%;
+}
+
+.scan-qr {
+    margin: 0 2.5rem;
+    padding: 1%;
+}
+
+.scan-qr a{
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.scan-qr .arrow-icon{
+    float: right;
+}
+
+.contact-list {
+    margin: 0 2.5rem;
+    padding: 1%;
+}
+
+.contact-list a{
+    color: black;
+    font-weight: bold;
+}
+
+.contact-list .arrow-icon{
+    float: right;
+}
+
+.edit-info {
+    margin: 0 2.5rem;
+    padding: 1%;
+}
+
+.edit-info a{
+    color: black;
+    font-weight: bold;
+}
+
+.edit-info .arrow-icon{
+    float: right;
+}
+
+.log-out {
+    margin: 0 2.5rem;
+    padding: 1%; 
+}
+
+.log-out a{
+    color: red;
+    font-weight: bold; 
+}
+
+.log-out .arrow-icon{
+    float: right;
+    color: black;
+}

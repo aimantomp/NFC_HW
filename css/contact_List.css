@@ -1,0 +1,162 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h2 {
+    color: black;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 20px auto;
+}
+
+.contact-list {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.contact-list:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    padding: 15px;
+    border-bottom: 1px solid #e6e6e6;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+}
+
+.contact-item:hover {
+    background-color: #f9f9f9;
+}
+
+.number-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.number-circle:hover {
+    background-color: #0056b3;
+}
+
+.contact-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.company-name {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.contact-details {
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.contact-details.visible {
+    display: block;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.phone-icon, .chevron-icon {
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.phone-icon {
+    color: #28a745;
+    margin-right: 20px;
+}
+
+.phone-icon:hover {
+    color: #218838;
+}
+
+.chevron-icon {
+    color: #007BFF;
+}
+
+.chevron-icon:hover {
+    color: #0056b3;
+}
+
+.button-group {
+    margin-top: 15px;
+}
+
+.remove-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.remove-button i {
+    margin-right: 5px;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+
+.save-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-button i {
+    margin-right: 5px;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
