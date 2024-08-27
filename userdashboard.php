@@ -81,7 +81,7 @@ if ($result->num_rows == 1) {
         </div>
         <hr>
         <div class="edit-info">
-            <a href="#"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <a href="info_Capture_OCR.php"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
         </div>
         <hr>
         <div class="log-out">
