@@ -1,137 +1,45 @@
-.section {
-    background-color: yellow;
-}
-
-/* Reset some default browser styles */
-body, ul {
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-/* Style the navigation bar */
-.top-nav-section {
-    display: flex;
-    background-color: #F5B335;
-    flex-direction: row-reverse;
-    padding: 10px;
+.sidebar {
+    background-color: #ffcc00;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
 }
 
-.left-nav-section {
-    float: left;
-    background-color: #45A041;
-    height: 5000px;
-    padding: 70px;
-}
-
-nav li {
-    list-style-type: none;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-
-/* Style the navigation links */
-nav ul li {
-    margin: 0 20px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
+.sidebar a {
+    color: black;
     display: block;
-}
-
-/* Add a hover effect to the links */
-nav ul li a:hover {
-    background-color: #555;
-    border-radius: 4px;
-}
-
-/* Make the nav bar responsive */
-@media (max-width: 600px) {
-    nav ul {
-        flex-direction: column;
-    }
-
-    nav ul li {
-        margin: 10px 0;
-    }
-}
-
-.business-card-table {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    border-collapse: collapse;
-    margin: -5px;
-    font-size: 18px;
-    text-align: left;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-}
-
-thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
-}
-
-th, td {
-    padding: 12px 15px;
-    border: 1px solid #dddddd;
-}
-
-tbody tr {
-    background-color: #ffffff;
-    border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
-
-button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.edit-btn {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.delete-btn {
-    background-color: #f44336;
-    color: white;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-form {
-    margin-bottom: 20px;
-}
-
-input, select {
-    margin: 5px 0;
     padding: 10px;
-    width: 200px;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: solid 1px #ffe16a;
+}
+
+.sidebar a:hover {
+    background-color: #fff6cc;
+}
+
+.topbar {
+    margin-left: 250px;
+    background-color: #ffcc00;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

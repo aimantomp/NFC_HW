@@ -1,11 +1,14 @@
 <?php
 session_start();
 if (isset($_SESSION['role'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header("Location: adminmain.php");
+    if ($_SESSION['role'] == 'superadmin') {
+        header("Location: adminmain.php"); // Redirect superadmin to adminmain.php
+        exit();
+    } elseif ($_SESSION['role'] == 'admin') {
+        header("Location: admin.php"); // Redirect admin to admin.php
         exit();
     } elseif ($_SESSION['role'] == 'user') {
-        header("Location: userdashboard.php");
+        header("Location: userdashboard.php"); // Redirect user to userdashboard.php
         exit();
     }
 }
@@ -19,6 +22,7 @@ if (isset($_SESSION['role'])) {
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/testing.css">
 </head>
 <body>
