@@ -35,7 +35,6 @@ if ($result->num_rows == 1) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,38 +57,29 @@ if ($result->num_rows == 1) {
                     <p><strong>IC:</strong> <?php echo htmlspecialchars($_SESSION['ic'] ?? 'N/A'); ?></p>
                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($_SESSION['gender'] ?? 'N/A'); ?></p>
                 </div>
-                <!-- <div class="bank-info">
-                    <p><strong>Bank Name:</strong> <?php echo htmlspecialchars($_SESSION['bank_name'] ?? 'N/A'); ?></p>
-                    <p><strong>Bank Account No:</strong> <?php echo htmlspecialchars($_SESSION['bank_account_no'] ?? 'N/A'); ?></p>
-                </div> -->
             </div>
         </div>
+
         <div class="company-info">
             <h2>Company Info</h2>
             <p><strong>Company Name:</strong> <?php echo htmlspecialchars($_SESSION['company_name'] ?? 'N/A'); ?></p>
-            <p><strong>Company Address:</strong> <?php echo htmlspecialchars($_SESSION['company_address'] ?? 'N/A'); ?></p>
-            <p><strong>Company Contact No:</strong> <?php echo htmlspecialchars($_SESSION['company_contact_no'] ?? 'N/A'); ?></p>
+            <p><strong>Address:</strong> <?php echo htmlspecialchars($_SESSION['company_address'] ?? 'N/A'); ?></p>
+            <p><strong>Contact No:</strong> <?php echo htmlspecialchars($_SESSION['company_contact_no'] ?? 'N/A'); ?></p>
         </div>
-        <hr>
-        <div class="scan-qr">
-            <a href="insert_Information.php"><i class="fas fa-qrcode"></i> Scan QR <i class="fas fa-chevron-right arrow-icon"></i></a> 
-            <!-- <a href="#"><i class="fas fa-qrcode"></i> Scan QR <i class="fas fa-chevron-right arrow-icon"></i></a> -->
-        </div>
-        <hr>
-        <div class="contact-list">
-            <a href="contact_List.php"><i class="fas fa-address-book"></i> Contact List <i class="fas fa-chevron-right arrow-icon"></i></a>
-        </div>
-        <hr>
-        <div class="edit-info">
-            <a href="info_Capture_OCR.php"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
-        </div>
-        <hr>
-        <div class="log-out">
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Log Out <i class="fas fa-chevron-right arrow-icon"></i></a>
+
+        <div class="menu-section">
+            <a href="scan_QR.php" class="menu-item"><i class="fas fa-qrcode"></i> Generate QR <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="contact_List.php" class="menu-item"><i class="fas fa-address-book"></i> Contact List <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="business_Card_Front.php" class="menu-item"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="logout.php" class="menu-item logout"><i class="fas fa-sign-out-alt"></i> Log Out <i class="fas fa-chevron-right arrow-icon"></i></a>
         </div>
     </div>
 </body>
 </html>
+
 
 <?php
 // print_r($_SESSION);

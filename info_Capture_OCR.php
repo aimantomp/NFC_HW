@@ -23,9 +23,9 @@
             <p>West Manchester, Manchester</p>
         </div>
         <div class="button-group">
-            <button type="button">
-                <i class="fas fa-arrow-up"></i>
-            </button>
+            <form action="business_Card_Front.php">
+                <button type="submit"><i class="fas fa-arrow-up"></i></button>
+            </form>
         </div>
     </div>
 </body>

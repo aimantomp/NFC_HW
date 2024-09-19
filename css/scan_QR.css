@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: xx-large;
+    background-color: #F5B335;
+    margin: 0;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+   width: 250px;
+}
+
+.temporary-button {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
