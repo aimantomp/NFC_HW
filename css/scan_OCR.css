@@ -1,0 +1,94 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Black background for contrast */
+    font-family: Arial, sans-serif;
+    color: #fff; /* White text for readability */
+}
+
+.scanner-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack scanner, button, and instructions vertically */
+}
+
+.scanner-overlay {
+    position: relative;
+    width: 80%;  /* Wide width to simulate a document page */
+    height: 80%; /* Tall height to simulate a document page */
+    border: 3px solid rgba(255, 255, 255, 0.2); /* Subtle border around the scanner */
+    box-shadow: 0 0 30px rgba(245, 179, 53, 0.4); /* Slight glowing effect with new color */
+    background-color: rgba(255, 255, 255, 0.05); /* Slight transparency to simulate scanner glass */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.scanner-frame {
+    width: 90%;   /* Larger width to simulate scanning a full document */
+    height: 90%;  /* Larger height to simulate scanning a full document */
+    border: 2px dashed #F5B335; /* Dashed border with new color */
+    box-sizing: border-box;
+    background-color: transparent;
+    position: relative;
+}
+
+.scanner-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #F5B335; /* Scanning line with new color */
+    animation: scan 2.5s infinite linear;
+    top: 0;
+    left: 0;
+}
+
+@keyframes scan {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+.snap-button {
+    margin-top: 20px; /* Space between scanner and button */
+    padding: 12px 24px;
+    background-color: #F5B335; /* Button background with new color */
+    color: #000; /* Black text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.snap-button i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.snap-button:hover {
+    background-color: #D49C2B; /* Darker shade of the new color on hover */
+}
+
+.instructions {
+    margin-top: 15px; /* Space between button and instructions */
+    font-size: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8); /* Slightly muted white */
+}

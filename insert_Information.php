@@ -27,15 +27,15 @@
             </div>
         </form>
         <div class="button-group">
-            <button type="button">
-                <i class="fas fa-upload"></i>
-            </button>
-            <button type="button">
-                <i class="fas fa-qrcode"></i>
-            </button>
-            <button type="submit">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <form action="business_Card_Front.php">
+                <button type="submit"><i class="fas fa-upload"></i></button>
+            </form>
+            <form action="scan_OCR.php">
+                <button type="submit"><i class="fas fa-qrcode"></i></button>
+            </form>
+            <form action="business_Card_Front.php">
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
         </div>
     </div>
 </body>

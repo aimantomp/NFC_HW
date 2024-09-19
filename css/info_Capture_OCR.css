@@ -1,9 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: whitesmoke;
+    background-color: #F5B335;
     margin: 0;
     padding: 0;
-
     align-items: center;
     justify-content: center;
 }
@@ -13,17 +12,14 @@ img {
 }
 
 .detail-container {
-    max-width: 700px;
+    max-width: 600px;
     background-color: white;
-    padding: 1rem 3rem 3rem 3rem;
-    /* margin: 3rem 10rem 3rem 10rem; */
-    text-align: center;
+    padding: 1rem 3rem 2rem 3rem;
+    margin: 2rem auto;
+    text-align: center !important;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-    /* display: flex; */
-    align-items: center; 
-    justify-content: center;
 }
 
 .contact-details {

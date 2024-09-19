@@ -2,8 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #F5B335;
     margin: 0;
-    padding: 0;
-    /* display: flex; */
+    padding: 20px;
     align-items: center;
     justify-content: center;
 }
@@ -13,13 +12,10 @@ img {
 }
 
 .form-container {
-    max-width: 700px;
+    max-width: 600px;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    /* margin-left: 7rem; */
-    margin-right: 7rem;
+    margin: 2rem auto;
     text-align: center !important;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
