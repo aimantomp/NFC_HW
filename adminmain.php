@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'superadmin') {
     header("Location: login.php");
     exit();
 }
@@ -95,123 +95,126 @@ $result = $conn->query($sql);
     <title>Admin</title>
 </head>
 <body>
-    <div class="top-nav-section">
-        <div class="menu-nav-bar">
-            <nav>
-                <ul>
-                    <li><a href="adminmain.php">Menu</a></li>
-                    <li><a href="logout.php">Logout</a></li>
-                    <li><a href="adminmain.php">Dummy</a></li>
-                    <li><img src="logo.png" id="logo" /> </li>
-                </ul>
-            </nav>
-        </div>
+<div class="top-nav-section">
+    <div class="menu-nav-bar">
+        <nav>
+            <ul>
+                <li><a href="adminmain.php">Menu</a></li>
+                <li><a href="company_register.php">Register Company</a></li> <!-- New Link Added -->
+                <li><a href="qr_phonebook.php">QR Phonebook</a></li>
+                <li><a href="logout.php">Logout</a></li>
+                <li><a href="adminmain.php">Dummy</a></li>
+                <li><img src="logo.png" id="logo" /></li>
+            </ul>
+        </nav>
     </div>
+</div>
 
 
     <h1>Welcome, Superadmin</h1>
 
     <div class="business-card-table">
-        <!-- Add User Form -->
-        <h2>Add New User</h2>
-        <form method="POST" action="" style="width: 100%">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="empname" placeholder="Employee Name" required>
-            <select name="gender" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="address" placeholder="Address" required>
-            <input type="text" name="phone_number" placeholder="Phone Number" pattern="\+60[0-9]{8,9}" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="text" name="ic" placeholder="IC" required>
-            <input type="text" name="bank_name" placeholder="Bank Name" required>
-            <input type="text" name="bank_account_no" placeholder="Bank Account No" required>
-            <input type="text" name="company_name" placeholder="Company Name" required>
-            <input type="text" name="company_address" placeholder="Company Address" required>
-            <input type="text" name="company_contact_no" placeholder="Company Contact No" required>
-            <select name="role" required>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-            </select>
-            <button type="submit" name="add_user">Add User</button>
-        </form>
+    <!-- Add User Form -->
+    <h2>Add New User</h2>
+    <form method="POST" action="" style="width: 100%">
+        <!-- <input type="text" name="username" placeholder="Username" required> --> 
+        <input type="text" name="empname" placeholder="Employee Name" required>
+        <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="phone_number" placeholder="Phone Number" pattern="\+60[0-9]{8,9}" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <!-- <input type="text" name="ic" placeholder="IC" required> -->
+        <!-- <input type="text" name="bank_name" placeholder="Bank Name" required> -->
+        <!-- <input type="text" name="bank_account_no" placeholder="Bank Account No" required> -->
+        <input type="text" name="company_name" placeholder="Company Name" required>
+        <input type="text" name="company_address" placeholder="Company Address" required>
+        <input type="text" name="company_contact_no" placeholder="Company Contact No" required>
+        <select name="role" required>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
+        <button type="submit" name="add_user">Add User</button>
+    </form>
 
-        <!-- User List -->
-        <h2>User List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Phone Number</th>
-                    <th>IC</th>
-                    <th>Bank Name</th>
-                    <th>Bank Account No</th>
-                    <th>Company Name</th>
-                    <th>Company Address</th>
-                    <th>Company Contact No</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['empname'] . "</td>";
-            echo "<td>" . $row['gender'] . "</td>";
-            echo "<td>" . $row['email'] . "</td>";
-            echo "<td>" . $row['address'] . "</td>";
-            echo "<td>" . $row['phone_number'] . "</td>";
-            echo "<td>" . $row['ic'] . "</td>";
-            echo "<td>" . $row['bank_name'] . "</td>";
-            echo "<td>" . $row['bank_account_no'] . "</td>";
-            echo "<td>" . $row['company_name'] . "</td>";
-            echo "<td>" . $row['company_address'] . "</td>";
-            echo "<td>" . $row['company_contact_no'] . "</td>";
-            echo "<td>" . $row['role'] . "</td>";
-            echo "<td>";
-            echo "<form method='POST' action='' style='display:inline;'>";
-            echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
-            echo "<input type='text' name='username' placeholder='Username' value='" . $row['username'] . "' required>";
-            echo "<input type='text' name='empname' placeholder='Name' value='" . $row['empname'] . "' required>";
-            echo "<select name='gender' required>";
-            echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
-            echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
-            echo "</select>";
-            echo "<input type='email' name='email' placeholder='Email' value='" . $row['email'] . "' required>";
-            echo "<input type='text' name='address' placeholder='Address' value='" . $row['address'] . "' required>";
-            echo "<input type='text' name='phone_number' placeholder='Phone Number' pattern='\+60[0-9]{8,9}' value='" . $row['phone_number'] . "' required>";
-            echo "<input type='text' name='ic' placeholder='IC' value='" . $row['ic'] . "' required>";
-            echo "<input type='text' name='bank_name' placeholder='Bank Name' value='" . $row['bank_name'] . "' required>";
-            echo "<input type='text' name='bank_account_no' placeholder='Bank Account No' value='" . $row['bank_account_no'] . "' required>";
-            echo "<input type='text' name='company_name' placeholder='Company Name' value='" . $row['company_name'] . "' required>";
-            echo "<input type='text' name='company_address' placeholder='Company Address' value='" . $row['company_address'] . "' required>";
-            echo "<input type='text' name='company_contact_no' placeholder='Company Contact No' value='" . $row['company_contact_no'] . "' required>";
-            echo "<select name='role' required>";
-            echo "<option value='admin'" . ($row['role'] == 'admin' ? ' selected' : '') . ">Admin</option>";
-            echo "<option value='user'" . ($row['role'] == 'user' ? ' selected' : '') . ">User</option>";
-            echo "</select>";
-            echo "<button type='submit' name='edit_user'>Edit</button>";
-            echo "</form>";
-            echo "<a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")'>Delete</a>";
-            echo "</td>";
-            echo "</tr>";
+    <!-- User List -->
+    <h2>User List</h2>
+    <table>
+        <thead>
+            <tr>
+                <!--  <th>Username</th> -->
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <!-- <th>IC</th> -->
+                <!-- <th>Bank Name</th> -->
+                <!-- <th>Bank Account No</th> -->
+                <th>Company Name</th>
+                <th>Company Address</th>
+                <th>Company Contact No</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                //echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['empname'] . "</td>";
+                echo "<td>" . $row['gender'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['address'] . "</td>";
+                echo "<td>" . $row['phone_number'] . "</td>";
+                // echo "<td>" . $row['ic'] . "</td>";
+                // echo "<td>" . $row['bank_name'] . "</td>";
+                // echo "<td>" . $row['bank_account_no'] . "</td>";
+                echo "<td>" . $row['company_name'] . "</td>";
+                echo "<td>" . $row['company_address'] . "</td>";
+                echo "<td>" . $row['company_contact_no'] . "</td>";
+                echo "<td>" . $row['role'] . "</td>";
+                echo "<td>";
+                echo "<form method='POST' action='' style='display:inline;'>";
+                echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                //echo "<input type='text' name='username' placeholder='Username' value='" . $row['username'] . "' required>";
+                echo "<input type='text' name='empname' placeholder='Name' value='" . $row['empname'] . "' required>";
+                echo "<select name='gender' required>";
+                echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
+                echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
+                echo "</select>";
+                echo "<input type='email' name='email' placeholder='Email' value='" . $row['email'] . "' required>";
+                echo "<input type='text' name='address' placeholder='Address' value='" . $row['address'] . "' required>";
+                echo "<input type='text' name='phone_number' placeholder='Phone Number' pattern='\+60[0-9]{8,9}' value='" . $row['phone_number'] . "' required>";
+                // echo "<input type='text' name='ic' placeholder='IC' value='" . $row['ic'] . "' required>";
+                // echo "<input type='text' name='bank_name' placeholder='Bank Name' value='" . $row['bank_name'] . "' required>";
+                // echo "<input type='text' name='bank_account_no' placeholder='Bank Account No' value='" . $row['bank_account_no'] . "' required>";
+                echo "<input type='text' name='company_name' placeholder='Company Name' value='" . $row['company_name'] . "' required>";
+                echo "<input type='text' name='company_address' placeholder='Company Address' value='" . $row['company_address'] . "' required>";
+                echo "<input type='text' name='company_contact_no' placeholder='Company Contact No' value='" . $row['company_contact_no'] . "' required>";
+                echo "<select name='role' required>";
+                echo "<option value='admin'" . ($row['role'] == 'admin' ? ' selected' : '') . ">Admin</option>";
+                echo "<option value='user'" . ($row['role'] == 'user' ? ' selected' : '') . ">User</option>";
+                echo "</select>";
+                echo "<button type='submit' name='edit_user'>Edit</button>";
+                echo "</form>";
+                echo "<a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")'>Delete</a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='8'>No users found</td></tr>";
         }
-    } else {
-        echo "<tr><td colspan='8'>No users found</td></tr>";
-    }
-    ?>
-            </tbody>
-        </table>
-    </div>
+        ?>
+        </tbody>
+    </table>
+</div>
+
 
     <!-- Notification Popup -->
     <div class="cd-popup" role="alert">

@@ -1,15 +1,19 @@
 <?php
 session_start();
 if (isset($_SESSION['role'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header("Location: adminmain.php");
+    if ($_SESSION['role'] == 'superadmin') {
+        header("Location: adminmain.php"); // Redirect superadmin to adminmain.php
+        exit();
+    } elseif ($_SESSION['role'] == 'admin') {
+        header("Location: admin.php"); // Redirect admin to admin.php
         exit();
     } elseif ($_SESSION['role'] == 'user') {
-        header("Location: userdashboard.php");
+        header("Location: userdashboard.php"); // Redirect user to userdashboard.php
         exit();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
