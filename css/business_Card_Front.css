@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+img {
+    padding-top: 20px;
+    width: 15rem;
+}
+
+.profile-card {
+    background-color: black;
+    text-align: center;
+}
+
+.profile-detail {
+    color: #f4f4f4;
+}
+
+.detail-card {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.linkedIn-button,
+.share-button {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+.linkedIn-button:hover,
+.share-button:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.white-block {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    width: 5px;
+    height: 70px;
+    margin: 20px auto; 
+    margin-bottom: 0;
+}
+
+.black-block {
+    margin-bottom: 20px;
+    background-color: black;
+    width: 5px;
+    height: 70px;
+    margin: 20px auto;
+    margin-top: 0;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.chevron-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px; 
+    height: 80px; 
+    background-color: #f4f4f4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 2rem; 
+    color: black;
+}
+
+.chevron-icon:hover {
+    background-color: #e0e0e0;
+}

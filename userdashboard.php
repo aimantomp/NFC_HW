@@ -45,48 +45,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
+    <link rel="stylesheet" href="css/userdashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="profile.css">
-
 </head>
 <body>
     <div class="profile-page">
-        <div class="header">
-            <div class="profile-pic">
-                <img src="images/profile.png" alt="Profile Picture">
-            </div>
-        </div>
-        <div class="profile-card">
+        <div class="header"></div>
+        <div class="profile-card"> 
             <div class="info-container">
+                <div class="profile-pic">
+                    <img src="images/profile.jpg" alt="Profile Picture">
+                </div>  
                 <div class="profile-info">
                     <p><strong>Name:</strong> <?php echo htmlspecialchars($_SESSION['name']); ?></p>
                     <p><strong>IC:</strong> <?php echo htmlspecialchars($_SESSION['ic'] ?? 'N/A'); ?></p>
                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($_SESSION['gender'] ?? 'N/A'); ?></p>
                 </div>
-                <div class="bank-info">
-                    <p><strong>Bank Name:</strong> <?php echo htmlspecialchars($_SESSION['bank_name'] ?? 'N/A'); ?></p>
-                    <p><strong>Bank Account No:</strong> <?php echo htmlspecialchars($_SESSION['bank_account_no'] ?? 'N/A'); ?></p>
-                </div>
             </div>
         </div>
+
         <div class="company-info">
             <h2>Company Info</h2>
             <p><strong>Company Name:</strong> <?php echo htmlspecialchars($_SESSION['company_name'] ?? 'N/A'); ?></p>
-            <p><strong>Company Address:</strong> <?php echo htmlspecialchars($_SESSION['company_address'] ?? 'N/A'); ?></p>
-            <p><strong>Company Contact No:</strong> <?php echo htmlspecialchars($_SESSION['company_contact_no'] ?? 'N/A'); ?></p>
+            <p><strong>Address:</strong> <?php echo htmlspecialchars($_SESSION['company_address'] ?? 'N/A'); ?></p>
+            <p><strong>Contact No:</strong> <?php echo htmlspecialchars($_SESSION['company_contact_no'] ?? 'N/A'); ?></p>
         </div>
-        <div class="scan-qr">
-            <a href="#"><i class="fas fa-qrcode"></i> Scan QR <i class="fas fa-chevron-right arrow-icon"></i></a>
-        </div>
-        <div class="contact-list">
-            <a href="contactlist.html"><i class="fas fa-address-book"></i> Contact List <i class="fas fa-chevron-right arrow-icon"></i></a>
-        </div>
-        <div class="edit-info">
-            <a href="#"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
-        </div>
-        <div class="log-out">
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Log Out <i class="fas fa-chevron-right arrow-icon"></i></a>
+
+        <div class="menu-section">
+            <a href="scan_QR.php" class="menu-item"><i class="fas fa-qrcode"></i> Generate QR <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="contact_List.php" class="menu-item"><i class="fas fa-address-book"></i> Contact List <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="business_Card_Front.php" class="menu-item"><i class="fas fa-edit"></i> Edit Info <i class="fas fa-chevron-right arrow-icon"></i></a>
+            <hr>
+            <a href="logout.php" class="menu-item logout"><i class="fas fa-sign-out-alt"></i> Log Out <i class="fas fa-chevron-right arrow-icon"></i></a>
         </div>
     </div>
 </body>
 </html>
+
+<?php
+// print_r($_SESSION);
+// exit();
+?>
+

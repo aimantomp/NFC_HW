@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'superadmin') {
+
     header("Location: login.php");
     exit();
 }
@@ -110,7 +111,6 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-
     <h1>Welcome, Superadmin</h1>
 
     <div class="business-card-table">
@@ -214,7 +214,6 @@ $result = $conn->query($sql);
         </tbody>
     </table>
 </div>
-
 
     <!-- Notification Popup -->
     <div class="cd-popup" role="alert">
