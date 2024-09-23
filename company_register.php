@@ -1,9 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'superadmin') {
     header("Location: login.php");
     exit();
 }
+
 
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'superadmin_db');
