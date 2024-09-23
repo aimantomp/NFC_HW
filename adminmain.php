@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'superadmin') {
-
     header("Location: login.php");
     exit();
 }
@@ -84,7 +83,7 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-$sql = "SELECT id, username, empname, ic, bank_name, bank_account_no, company_name, company_address, company_contact_no, gender, email, address, phone_number, role FROM users";
+$sql = "SELECT id, username, empname, ic, company_name, company_address, company_contact_no, email, phone_number, role FROM users";
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -102,9 +101,8 @@ $result = $conn->query($sql);
             <ul>
                 <li><a href="adminmain.php">Menu</a></li>
                 <li><a href="company_register.php">Register Company</a></li> <!-- New Link Added -->
-                <li><a href="qr_phonebook.php">QR Phonebook</a></li>
                 <li><a href="logout.php">Logout</a></li>
-                <li><a href="adminmain.php">Dummy</a></li>
+                <!-- <li><a href="adminmain.php">Dummy</a></li> -->
                 <li><img src="logo.png" id="logo" /></li>
             </ul>
         </nav>
@@ -119,12 +117,7 @@ $result = $conn->query($sql);
     <form method="POST" action="" style="width: 100%">
         <!-- <input type="text" name="username" placeholder="Username" required> --> 
         <input type="text" name="empname" placeholder="Employee Name" required>
-        <select name="gender" required>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
         <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="address" placeholder="Address" required>
         <input type="text" name="phone_number" placeholder="Phone Number" pattern="\+60[0-9]{8,9}" required>
         <input type="password" name="password" placeholder="Password" required>
         <!-- <input type="text" name="ic" placeholder="IC" required> -->
@@ -147,9 +140,7 @@ $result = $conn->query($sql);
             <tr>
                 <!--  <th>Username</th> -->
                 <th>Name</th>
-                <th>Gender</th>
                 <th>Email</th>
-                <th>Address</th>
                 <th>Phone Number</th>
                 <!-- <th>IC</th> -->
                 <!-- <th>Bank Name</th> -->
@@ -168,9 +159,7 @@ $result = $conn->query($sql);
                 echo "<tr>";
                 //echo "<td>" . $row['username'] . "</td>";
                 echo "<td>" . $row['empname'] . "</td>";
-                echo "<td>" . $row['gender'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
-                echo "<td>" . $row['address'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 // echo "<td>" . $row['ic'] . "</td>";
                 // echo "<td>" . $row['bank_name'] . "</td>";
@@ -184,12 +173,11 @@ $result = $conn->query($sql);
                 echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
                 //echo "<input type='text' name='username' placeholder='Username' value='" . $row['username'] . "' required>";
                 echo "<input type='text' name='empname' placeholder='Name' value='" . $row['empname'] . "' required>";
-                echo "<select name='gender' required>";
-                echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
-                echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
-                echo "</select>";
+                // echo "<select name='gender' required>";
+                // echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
+                // echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
+                // echo "</select>";
                 echo "<input type='email' name='email' placeholder='Email' value='" . $row['email'] . "' required>";
-                echo "<input type='text' name='address' placeholder='Address' value='" . $row['address'] . "' required>";
                 echo "<input type='text' name='phone_number' placeholder='Phone Number' pattern='\+60[0-9]{8,9}' value='" . $row['phone_number'] . "' required>";
                 // echo "<input type='text' name='ic' placeholder='IC' value='" . $row['ic'] . "' required>";
                 // echo "<input type='text' name='bank_name' placeholder='Bank Name' value='" . $row['bank_name'] . "' required>";

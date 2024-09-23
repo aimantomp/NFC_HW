@@ -5,6 +5,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
+
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'superadmin_db');
 
