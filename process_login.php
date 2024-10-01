@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $row['password'])) {
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['role'] = $row['role'];
-                $_SESSION['name'] = $row['name'];
+                $_SESSION['name'] = $row['empname'];
 
                 // Redirect based on role
                 if ($row['role'] == 'superadmin') {

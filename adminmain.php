@@ -1,250 +1,304 @@
 <?php
+// Start the session
 session_start();
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "superadmin_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'superadmin') {
 
     header("Location: login.php");
     exit();
 }
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'superadmin_db');
+// Check if the user's name is available in the session
+$username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Handle Add User
+if (isset($_POST['add_user'])) {
+    $name = $conn->real_escape_string($_POST['empname']);
+    $username = $conn->real_escape_string($_POST['username']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $password = password_hash($conn->real_escape_string($_POST['password']), PASSWORD_DEFAULT);
+    $role = $conn->real_escape_string($_POST['role']);
+    $company = $conn->real_escape_string($_POST['company_name']);
+    $created_at = date('Y-m-d');
+    $created_time = date('H:i:s');
 
-$notification_message = "";
-$notification_type = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['add_user'])) {
-        $username = $conn->real_escape_string($_POST['username']);
-        $email = $conn->real_escape_string($_POST['email']);
-        $password = password_hash($conn->real_escape_string($_POST['password']), PASSWORD_DEFAULT);
-        $role = $conn->real_escape_string($_POST['role']);
-        $gender = $conn->real_escape_string($_POST['gender']);
-        $empname = strtoupper($conn->real_escape_string($_POST['empname']));
-        $address = $conn->real_escape_string($_POST['address']);
-        $phone_number = $conn->real_escape_string($_POST['phone']);
-        $ic = $conn->real_escape_string($_POST['ic']);
-        $bank_name = $conn->real_escape_string($_POST['bank_name']);
-        $bank_account_no = $conn->real_escape_string($_POST['bank_account_no']);
-        $company_name = $conn->real_escape_string($_POST['company_name']);
-        $company_address = $conn->real_escape_string($_POST['company_address']);
-        $company_contact_no = $conn->real_escape_string($_POST['company_contact_no']);
-
-        $sql = "INSERT INTO users (username, empname, gender, email, ic, bank_name, bank_account_no, company_name, company_address, company_contact_no, address, phone_number, password, role) 
-                VALUES ('$username', '$empname', '$gender', '$email', '$ic', '$bank_name', '$bank_account_no', '$company_name', '$company_address', '$company_contact_no', '$address', '$phone_number', '$password', '$role')";
-
-        if ($conn->query($sql) === TRUE) {
-            $notification_message = "New user added successfully!";
-            $notification_type = "success";
-        } else {
-            $notification_message = "Error: " . $conn->error;
-            $notification_type = "error";
-        }
-    } elseif (isset($_POST['edit_user'])) {
-        $id = $conn->real_escape_string($_POST['id']);
-        $username = $conn->real_escape_string($_POST['username']);
-        $email = $conn->real_escape_string($_POST['email']);
-        $role = $conn->real_escape_string($_POST['role']);
-        $empname = $conn->real_escape_string($_POST['empname']);
-        $gender = $conn->real_escape_string($_POST['gender']);
-        $address = $conn->real_escape_string($_POST['address']);
-        $phone_number = $conn->real_escape_string($_POST['phone_number']);
-        $ic = $conn->real_escape_string($_POST['ic']);
-        $bank_name = $conn->real_escape_string($_POST['bank_name']);
-        $bank_account_no = $conn->real_escape_string($_POST['bank_account_no']);
-        $company_name = $conn->real_escape_string($_POST['company_name']);
-        $company_address = $conn->real_escape_string($_POST['company_address']);
-        $company_contact_no = $conn->real_escape_string($_POST['company_contact_no']);
-
-        $sql = "UPDATE users SET username = '$username', ic = '$ic', bank_name = '$bank_name', bank_account_no = '$bank_account_no', company_name = '$company_name', company_address = '$company_address', company_contact_no = '$company_contact_no', empname = '$empname', gender = '$gender', email = '$email', address = '$address', phone_number = '$phone_number', role = '$role' WHERE id = '$id'";
-
-        if ($conn->query($sql) === TRUE) {
-            $notification_message = "User updated successfully!";
-            $notification_type = "success";
-        } else {
-            $notification_message = "Error: " . $conn->error;
-            $notification_type = "error";
-        }
-    }
-}
-
-if (isset($_GET['delete_id'])) {
-    $id = $conn->real_escape_string($_GET['delete_id']);
-    $sql = "DELETE FROM users WHERE id = '$id'";
+    $sql = "INSERT INTO users (empname, username, email, password, role, company_name) 
+            VALUES ('$name', '$username', '$email','$password', '$role', '$company')";
 
     if ($conn->query($sql) === TRUE) {
-        $notification_message = "User deleted successfully!";
-        $notification_type = "success";
+        $_SESSION['message'] = "New user added successfully!";
     } else {
-        $notification_message = "Error: " . $conn->error;
-        $notification_type = "error";
+        $_SESSION['message'] = "Error: " . $conn->error;
     }
 }
 
-$sql = "SELECT id, username, empname, ic, bank_name, bank_account_no, company_name, company_address, company_contact_no, gender, email, address, phone_number, role FROM users";
+// Handle Edit User
+if (isset($_POST['edit_user'])) {
+    $id = intval($_POST['id']);
+    $name = $conn->real_escape_string($_POST['empname']);
+    $username = $conn->real_escape_string($_POST['username']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $role = $conn->real_escape_string($_POST['role']);
+    $company = $conn->real_escape_string($_POST['company_name']);
+
+    $sql = "UPDATE users SET empname='$name', username='$username', email='$email', role='$role', company_name='$company' WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        $_SESSION['message'] = "User updated successfully!";
+    } else {
+        $_SESSION['message'] = "Error: " . $conn->error;
+    }
+}
+
+// Handle Delete User
+if (isset($_GET['delete'])) {
+    $id = intval($_GET['delete']);
+    $sql = "DELETE FROM users WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        $_SESSION['message'] = "User deleted successfully!";
+    } else {
+        $_SESSION['message'] = "Error: " . $conn->error;
+    }
+}
+
+// Fetch all users for display
+$sql = "SELECT * FROM users ORDER BY id ASC";
 $result = $conn->query($sql);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="adminmain.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="adminmain.css">
 </head>
 <body>
-<div class="top-nav-section">
-    <div class="menu-nav-bar">
-        <nav>
-            <ul>
-                <li><a href="adminmain.php">Menu</a></li>
-                <li><a href="company_register.php">Register Company</a></li> <!-- New Link Added -->
-                <li><a href="qr_phonebook.php">QR Phonebook</a></li>
-                <li><a href="logout.php">Logout</a></li>
-                <li><a href="adminmain.php">Dummy</a></li>
-                <li><img src="logo.png" id="logo" /></li>
-            </ul>
-        </nav>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <img src="images/logo.png" alt="Logo" width="150">
+        </div>
+        <a href="admin.php">Dashboard Admin</a>
+        <a href="#">Add User</a>
+        <a href="qr_phonebook.php">QR Phone Book</a>
+        <a href="#">Edit User</a>
+        <a href="logout.php">Logout</a>
     </div>
-</div>
 
-    <h1>Welcome, Superadmin</h1>
-
-    <div class="business-card-table">
-    <!-- Add User Form -->
-    <h2>Add New User</h2>
-    <form method="POST" action="" style="width: 100%">
-        <!-- <input type="text" name="username" placeholder="Username" required> --> 
-        <input type="text" name="empname" placeholder="Employee Name" required>
-        <select name="gender" required>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="address" placeholder="Address" required>
-        <input type="text" name="phone_number" placeholder="Phone Number" pattern="\+60[0-9]{8,9}" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <!-- <input type="text" name="ic" placeholder="IC" required> -->
-        <!-- <input type="text" name="bank_name" placeholder="Bank Name" required> -->
-        <!-- <input type="text" name="bank_account_no" placeholder="Bank Account No" required> -->
-        <input type="text" name="company_name" placeholder="Company Name" required>
-        <input type="text" name="company_address" placeholder="Company Address" required>
-        <input type="text" name="company_contact_no" placeholder="Company Contact No" required>
-        <select name="role" required>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-        </select>
-        <button type="submit" name="add_user">Add User</button>
-    </form>
-
-    <!-- User List -->
-    <h2>User List</h2>
-    <table>
-        <thead>
-            <tr>
-                <!--  <th>Username</th> -->
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <!-- <th>IC</th> -->
-                <!-- <th>Bank Name</th> -->
-                <!-- <th>Bank Account No</th> -->
-                <th>Company Name</th>
-                <th>Company Address</th>
-                <th>Company Contact No</th>
-                <th>Role</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                //echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['empname'] . "</td>";
-                echo "<td>" . $row['gender'] . "</td>";
-                echo "<td>" . $row['email'] . "</td>";
-                echo "<td>" . $row['address'] . "</td>";
-                echo "<td>" . $row['phone_number'] . "</td>";
-                // echo "<td>" . $row['ic'] . "</td>";
-                // echo "<td>" . $row['bank_name'] . "</td>";
-                // echo "<td>" . $row['bank_account_no'] . "</td>";
-                echo "<td>" . $row['company_name'] . "</td>";
-                echo "<td>" . $row['company_address'] . "</td>";
-                echo "<td>" . $row['company_contact_no'] . "</td>";
-                echo "<td>" . $row['role'] . "</td>";
-                echo "<td>";
-                echo "<form method='POST' action='' style='display:inline;'>";
-                echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
-                //echo "<input type='text' name='username' placeholder='Username' value='" . $row['username'] . "' required>";
-                echo "<input type='text' name='empname' placeholder='Name' value='" . $row['empname'] . "' required>";
-                echo "<select name='gender' required>";
-                echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
-                echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
-                echo "</select>";
-                echo "<input type='email' name='email' placeholder='Email' value='" . $row['email'] . "' required>";
-                echo "<input type='text' name='address' placeholder='Address' value='" . $row['address'] . "' required>";
-                echo "<input type='text' name='phone_number' placeholder='Phone Number' pattern='\+60[0-9]{8,9}' value='" . $row['phone_number'] . "' required>";
-                // echo "<input type='text' name='ic' placeholder='IC' value='" . $row['ic'] . "' required>";
-                // echo "<input type='text' name='bank_name' placeholder='Bank Name' value='" . $row['bank_name'] . "' required>";
-                // echo "<input type='text' name='bank_account_no' placeholder='Bank Account No' value='" . $row['bank_account_no'] . "' required>";
-                echo "<input type='text' name='company_name' placeholder='Company Name' value='" . $row['company_name'] . "' required>";
-                echo "<input type='text' name='company_address' placeholder='Company Address' value='" . $row['company_address'] . "' required>";
-                echo "<input type='text' name='company_contact_no' placeholder='Company Contact No' value='" . $row['company_contact_no'] . "' required>";
-                echo "<select name='role' required>";
-                echo "<option value='admin'" . ($row['role'] == 'admin' ? ' selected' : '') . ">Admin</option>";
-                echo "<option value='user'" . ($row['role'] == 'user' ? ' selected' : '') . ">User</option>";
-                echo "</select>";
-                echo "<button type='submit' name='edit_user'>Edit</button>";
-                echo "</form>";
-                echo "<a href='?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")'>Delete</a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='8'>No users found</td></tr>";
-        }
-        ?>
-        </tbody>
-    </table>
-</div>
-
-    <!-- Notification Popup -->
-    <div class="cd-popup" role="alert">
-        <div class="cd-popup-container">
-            <p id="notification-message"></p>
-            <ul class="cd-buttons">
-                <li><a href="#0" class="cd-popup-close">Close</a></li>
-            </ul>
-            <a href="#0" class="cd-popup-close img-replace">Close</a>
+    <!-- Topbar -->
+    <div class="topbar">
+        <h3 class="text-black"><b>Dashboard</b></h3>
+        <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Welcome, <?php echo htmlspecialchars($username); ?>!
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="#">Logout</a>
+        </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="admin.js"></script>
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <!-- Display any messages -->
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert alert-info">
+                    <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Add User Button -->
+            <button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#addUserModal">
+                Add User
+            </button>
+
+            <!-- User Table -->
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Company</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($result->num_rows > 0): ?>
+                            <?php while($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo $row['id']; ?></td>
+                                    <td><?php echo $row['empname']; ?></td>
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td><span class="badge badge-secondary"><?php echo $row['role']; ?></span></td>
+                                    <td><?php echo $row['company_name']; ?></td>
+                                    <td>
+                                        <button 
+                                            class="btn btn-sm btn-primary edit-btn"
+                                            data-id="<?php echo $row['id']; ?>"
+                                            data-empname="<?php echo $row['empname']; ?>"
+                                            data-username="<?php echo $row['username']; ?>"
+                                            data-email="<?php echo $row['email']; ?>"
+                                            data-role="<?php echo $row['role']; ?>"
+                                            data-company="<?php echo $row['company_name']; ?>"
+                                            data-toggle="modal"
+                                            data-target="#editUserModal"
+                                        >Edit</button>
+                                    </td>
+                                    <td><a href="?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="8">No users found.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="empname">Name</label>
+                            <input type="text" class="form-control" name="empname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select name="role" class="form-control" required>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="company_name">Company</label>
+                            <input type="text" class="form-control" name="company_name" required>
+                        </div>
+                        <div class="text-right">
+                        <button type="submit" class="btn btn-primary" name="add_user">Add User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="">
+                        <input type="hidden" name="id" id="edit-id">
+                        <div class="form-group">
+                            <label for="edit-empname">Name</label>
+                            <input type="text" class="form-control" name="empname" id="edit-empname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-username">Username</label>
+                            <input type="text" class="form-control" name="username" id="edit-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email</label>
+                            <input type="email" class="form-control" name="email" id="edit-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-role">Role</label>
+                            <select name="role" id="edit-role" class="form-control" required>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-company">Company</label>
+                            <input type="text" class="form-control" name="company_name" id="edit-company" required>
+                        </div>
+                        <div class="text-right">
+                        <button type="submit" class="btn btn-primary" name="edit_user">Update User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        var notificationMessage = "<?php echo addslashes($notification_message); ?>";
-        var notificationType = "<?php echo $notification_type; ?>";
-
         $(document).ready(function() {
-            if (notificationMessage) {
-                $('#notification-message').text(notificationMessage);
-                $('.cd-popup').addClass('is-visible');
-            }
+            // Edit button click event
+            $('.edit-btn').click(function() {
+                var id = $(this).data('id');
+                var empname = $(this).data('empname');
+                var username = $(this).data('username');
+                var email = $(this).data('email');
+                var role = $(this).data('role');
+                var company = $(this).data('company');
 
-            $('.cd-popup-close').on('click', function(event){
-                event.preventDefault();
-                $('.cd-popup').removeClass('is-visible');
+                // Set values in the edit form
+                $('#edit-id').val(id);
+                $('#edit-empname').val(empname);
+                $('#edit-username').val(username);
+                $('#edit-email').val(email);
+                $('#edit-role').val(role);
+                $('#edit-company').val(company);
             });
         });
     </script>
 </body>
 </html>
-
-<?php $conn->close(); ?>

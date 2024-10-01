@@ -11,9 +11,14 @@ $dbname = "superadmin_db";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+
+    header("Location: login.php");
+    exit();
 }
+
+// Check if the user's name is available in the session
+$username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 
 // Handle Add User
 if (isset($_POST['add_user'])) {
@@ -69,6 +74,7 @@ if (isset($_GET['delete'])) {
 // Fetch all users for display
 $sql = "SELECT * FROM users ORDER BY id ASC";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +90,7 @@ $result = $conn->query($sql);
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="text-center mb-4">
-            <img src="logo.png" alt="Logo" width="150">
+            <img src="images/logo.png" alt="Logo" width="150">
         </div>
         <a href="admin.php">Dashboard Admin</a>
         <a href="#">Add User</a>
@@ -95,10 +101,10 @@ $result = $conn->query($sql);
 
     <!-- Topbar -->
     <div class="topbar">
-        <h3 class="text-white">Dashboard</h3>
+        <h3 class="text-black"><b>Dashboard</b></h3>
         <div class="dropdown">
         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Welcome!
+            Welcome, <?php echo htmlspecialchars($username); ?>!
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Profile</a>

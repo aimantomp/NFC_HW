@@ -3,11 +3,18 @@ body {
 }
 
 .sidebar {
-    background-color: #ffcc00;
+    background-color: #ffefad;
     width: 250px;
     position: fixed;
     height: 100%;
-    padding-top: 20px;
+    border-right: solid 1px #ffe16a;
+}
+
+.sidebar img {
+    display: flex; 
+    margin-top: 10px;
+    margin-left: 50px;
+    /* background-color: black; */
 }
 
 .sidebar a {
